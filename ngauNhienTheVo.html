@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngẫu Nhiên Thế Võ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Nhấn "Bắt Đầu" để Google đọc ngẫu nhiên thế võ</h2>
+        <button onclick="startReading()">Bắt Đầu</button>
+        <button onclick="stopReading()">Dừng</button>
+    </div>
+    
+    <script>
+        let moves = [
+            "Đấm Thẳng", "Đấm Thấp", "Đấm Móc", "Đấm Múc", "Đấm Bật Ngược", "Đấm Bật Ngang", "Đấm Lao",
+            "Đá Đạp", "Đá Cạnh",
+            "Chém Lối 1", "Chém Lối 2", "Chém Lối 3", "Chém Lối 4",
+            "Trỏ 1", "Trỏ 2", "Trỏ 3", "Trỏ 4",
+            "Gạt Lối 1", "Gạt Lối 2", "Gạt Lối 3", "Gạt Lối 4"
+        ];
+
+        let interval;
+
+        function getRandomMove() {
+            return moves[Math.floor(Math.random() * moves.length)];
+        }
+
+        function speak(text) {
+            let utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = "vi-VN";
+            speechSynthesis.speak(utterance);
+        }
+
+        function startReading() {
+            if (!interval) {
+                speak("Bắt đầu đọc thế võ");
+                interval = setInterval(() => {
+                    speak(getRandomMove());
+                }, 5000);
+            }
+        }
+
+        function stopReading() {
+            if (interval) {
+                clearInterval(interval);
+                interval = null;
+                speak("Dừng đọc thế võ");
+            }
+        }
+    </script>
+</body>
+</html>
